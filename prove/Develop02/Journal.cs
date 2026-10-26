@@ -6,45 +6,46 @@ using System.Security.Cryptography.X509Certificates;
 public class Journal
 {
     public List<Entry> _journal;
+    public List<Entry> listOfEntries = new List<Entry>();
     public void DisplayJournalMenu()
     {
-        Console.WriteLine("1: New Entry");
-        Console.WriteLine("2: Display Journal");
-        Console.WriteLine("3: Save Journal");
-        Console.WriteLine("4: Load Journal");
-        Console.WriteLine("5: Exit Journal");
-        Console.Write("Please enter the option of your choosing: ");
-        int choice = ParseUserResponse();
-        List<Entry> listOfEntries = new List<Entry>();
-        if (choice == 1)
+        int choice;
+        do
         {
-            listOfEntries.Add(Entry.WriteAnEntry());
-            DisplayJournalMenu();
-        }
-        else if (choice == 2)
-        {
-            foreach(object Entry in listOfEntries)
+            Console.WriteLine("1: New Entry");
+            Console.WriteLine("2: Display Journal");
+            Console.WriteLine("3: Save Journal");
+            Console.WriteLine("4: Load Journal");
+            Console.WriteLine("5: Exit Journal");
+            Console.Write("Please enter the option of your choosing: ");
+            choice = ParseUserResponse();
+            if (choice == 1)
             {
-                Console.WriteLine($"srtafh");
+                listOfEntries.Add(Entry.WriteAnEntry());
             }
-            DisplayJournalMenu();
-        }
-        else if (choice == 3)
-        {
-            Console.Write("Please enter the filename in full :");
-            string filename = Console.ReadLine();
-            WriteEntriesToCSV(listOfEntries, filename);
-            DisplayJournalMenu();
-        }
-        else if (choice == 4)
-        {
-            
-        }
-        else if (choice == 5)
-        {
-        Menu menu = new Menu();
-        menu.ChooseWhereToGo();
-        }
+            else if (choice == 2)
+            {
+                foreach(object Entry in listOfEntries)
+                {
+                    Console.WriteLine(Entry);
+                }
+            }
+            else if (choice == 3)
+            {
+                Console.Write("Please enter the filename in full :");
+                string filename = Console.ReadLine();
+                WriteEntriesToCSV(listOfEntries, filename);
+            }
+            else if (choice == 4)
+            {
+                
+            }
+            else if (choice == 5)
+            {
+            Menu menu = new Menu();
+            menu.ChooseWhereToGo();
+            }
+        } while (choice != 5);
     }
     public int ParseUserResponse()
     {
